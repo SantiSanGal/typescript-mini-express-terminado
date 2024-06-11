@@ -5,9 +5,8 @@
 //tsc 
 console.log('código de typescript');
 
-const express = require('express');
-
-const path = require('path');
+import express = require('express')
+import path = require('path')
 
 const app = express();
 
