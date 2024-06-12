@@ -1,24 +1,21 @@
-//Para iniciar archivo de configuración de typescript
-//tsc --init
+import express = require('express');
 
-//para compilar los archivos 
-//tsc 
-console.log('código de typescript');
+//si se importa aldo de este archivo, esto se va a exportar por defecto
+export default class Server {
+    public app: express.Application;
+    public port: number;
 
-import express = require('express')
-import path = require('path')
+    constructor(puerto: number) {
+        this.port = puerto;
+        this.app = express();
+    }
 
-const app = express();
+    //Dispara el constructor y sólo se tiene una instancia de Express
+    static init(puerto: number) {
+        return new Server(puerto)
+    }
 
-const publicPath = path.resolve(__dirname, '../public');
-
-const port = process.env.PORT || 3000;
-
-app.use(express.static(publicPath));
-
-app.listen(port, (err) => {
-    if (err) throw new Error(err);
-
-    console.log(`Servidor corriendo en puerto ${port}`);
-
-});
+    start(callback: () => void): void {
+        this.app.listen(this.port, callback)
+    }
+}

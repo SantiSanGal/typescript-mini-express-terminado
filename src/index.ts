@@ -1,25 +1,7 @@
-//Para iniciar archivo de configuración de typescript
-//tsc --init
+import Server from "./server/server";
 
-//para compilar los archivos 
-//tsc 
-console.log('código de typescript');
+const server = Server.init(3000);
 
-const express = require('express');
-
-const path = require('path');
-
-const app = express();
-
-const publicPath = path.resolve(__dirname, '../public');
-
-const port = process.env.PORT || 3000;
-
-app.use(express.static(publicPath));
-
-app.listen(port, (err) => {
-    if (err) throw new Error(err);
-
-    console.log(`Servidor corriendo en puerto ${port}`);
-
-});
+server.start(() => {
+    console.log('Servidor corriendo en el puerto 3000');
+})
