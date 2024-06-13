@@ -1,4 +1,5 @@
 import express = require('express');
+import path = require('path');
 
 //si se importa aldo de este archivo, esto se va a exportar por defecto
 export default class Server {
@@ -15,7 +16,13 @@ export default class Server {
         return new Server(puerto)
     }
 
+    private publicFolder() {
+        const publicPath = path.resolve(__dirname, '../public')
+        this.app.use(express.static(publicPath))
+    }
+
     start(callback: () => void): void {
         this.app.listen(this.port, callback)
+        this.publicFolder();
     }
 }
